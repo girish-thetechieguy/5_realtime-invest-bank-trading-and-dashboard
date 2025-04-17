@@ -57,5 +57,8 @@ Build a responsive dashboard for clients and advisors to monitor stocks, execute
 | **Auth Service**    | Spring Security + JWT            | Role-based access control            |
 | **Frontend**        | React.ts + Redux                 | Interactive dashboard                |
 
+## Basic activity diagram:
+
+
 ## Installation
 1. **Update later
