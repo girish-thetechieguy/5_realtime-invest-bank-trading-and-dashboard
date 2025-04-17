@@ -58,7 +58,7 @@ Build a responsive dashboard for clients and advisors to monitor stocks, execute
 | **Frontend**        | React.ts + Redux                 | Interactive dashboard                |
 
 ## Basic activity diagram:
-
+![img.png](img.png)
 
 ## Installation
 1. **Update later
