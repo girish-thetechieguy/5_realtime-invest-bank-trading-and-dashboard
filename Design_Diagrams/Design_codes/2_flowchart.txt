@@ -1,0 +1,18 @@
+flowchart TD
+ subgraph subGraph0["Real-Time Updates"]
+        G["Stock Market: Subscribe to AAPL, MSFT"]
+        F["Market Data Service"]
+        H["Frontend: Push Prices via WebSocket"]
+  end
+    A["Client Logs In (JWT Auth)"] --> B["Frontend"]
+    B --> C["API Gateway: GET /portfolio"] & E["Display Portfolio"] & J["API Gateway: POST /orders"] & N["Frontend: Show Notification + Updated Portfolio"]
+    C --> D["Portfolio Service: Retrieve Data"] & B
+    D --> C
+    F --> G & H
+    G --> F
+    I["Client: Places Order (BUY 10 AAPL @ $180)"] --> B
+    J --> K["Order Service: Validate & Process"] & B
+    K --> L["Stock Market: Execute Trade"] & M["Portfolio Service: Update Holdings"] & J
+    L --> K
+    M --> K
+    N --> O["Client"]

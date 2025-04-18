@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant Client
+    participant Advisor
+    participant Frontend
+    participant API_Gateway
+    participant Market_Data_Service
+    participant Order_Service
+    participant Stock_Market
+
+    Client->>Frontend: Logs in (JWT Auth)
+    Frontend->>API_Gateway: Fetch portfolio (GET /portfolio)
+    API_Gateway->>Portfolio_Service: Retrieve data
+    Portfolio_Service-->>API_Gateway: Portfolio JSON
+    API_Gateway-->>Frontend: Response
+
+    loop Real-Time Updates
+        Market_Data_Service->>Stock_Market: Subscribe to AAPL, MSFT
+        Stock_Market-->>Market_Data_Service: Stream prices
+        Market_Data_Service->>Frontend: Push updates (WebSocket)
+    end
+
+    Client->>Frontend: Places order (BUY 10 AAPL @ $180)
+    Frontend->>API_Gateway: POST /orders
+    API_Gateway->>Order_Service: Validate & process
+    Order_Service->>Stock_Market: Execute trade (mock)
+    Stock_Market-->>Order_Service: Confirmation
+    Order_Service->>Portfolio_Service: Update holdings
+    Order_Service-->>API_Gateway: Order status
+    API_Gateway-->>Frontend: Success/Failure
+    Frontend->>Client: Notification + updated portfolio
